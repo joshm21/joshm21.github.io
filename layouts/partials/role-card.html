@@ -1,0 +1,9 @@
+{{ partial "base-card.html" (dict
+"class" "role-card"
+"title" .Params.job_title
+"subtitle" .Params.company_name
+"summary" .Params.job_summary
+"photo" .Params.company_logo
+"link" .RelPermalink
+"badges" ""
+) }}

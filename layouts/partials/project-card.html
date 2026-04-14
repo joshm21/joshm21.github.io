@@ -1,0 +1,25 @@
+{{ $badges := "" }}
+
+{{/* 1. Domains */}}
+{{ range .Params.project_domains }}
+    {{ $badges = printf "%s %s" $badges (partial "badge" (dict "type" "domain" "value" .)) }}
+{{ end }}
+
+{{/* 2. Role */}}
+{{ $badges = printf "%s %s" $badges (partial "badge" (dict "type" "role" "value" .Params.company_name)) }}
+
+{{/* 3. Skills */}}
+{{ range .Params.project_skills }}
+    {{ $badges = printf "%s %s" $badges (partial "badge" (dict "type" "skill" "value" .)) }}
+{{ end }}
+
+{{ partial "base-card.html" (dict 
+    "class" "project-card"
+    "title" .Params.project_title
+    "subtitle" .Params.company_name
+    "summary" .Params.project_summary
+    "photo" .Params.project_photo
+    "link" .RelPermalink
+    "live_url" .Params.project_url
+    "badges" $badges
+) }}

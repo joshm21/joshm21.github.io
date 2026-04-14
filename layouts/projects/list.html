@@ -1,0 +1,93 @@
+{{ define "main" }}
+<main class="main">
+    <header class="page-header">
+        <h1>Projects</h1>
+
+        <div class="filter-dashboard">
+            {{ $allProjects := (where .Site.RegularPages "Section" "projects") }}
+
+            <div class="filter-row">
+                <span class="filter-label">Domains:</span>
+                <div class="filter-pills">
+                    {{ $domains := slice }}
+                    {{ range $allProjects }}{{ $domains = $domains | append .Params.project_domains }}{{ end }}
+                    {{ range ($domains | uniq | sort) }}
+                    {{ partial "badge" (dict "type" "domain" "value" . "mode" "filter") }}
+                    {{ end }}
+                </div>
+            </div>
+
+            <div class="filter-row">
+                <span class="filter-label">Skills:</span>
+                <div class="filter-pills">
+                    {{ $skills := slice }}
+                    {{ range $allProjects }}{{ $skills = $skills | append .Params.project_skills }}{{ end }}
+                    {{ range ($skills | uniq | sort) }}
+                    {{ partial "badge" (dict "type" "skill" "value" . "mode" "filter") }}
+                    {{ end }}
+                </div>
+            </div>
+
+            <div id="active-filter-indicator" style="display:none;">
+                <span>Filtering by: <strong id="filter-text"></strong></span>
+                <a href="/projects/" class="clear-btn">✕ Clear All</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="list-container">
+        {{ range .Pages }}
+        <div class="project-item" 
+            data-skill="{{ range .Params.project_skills }}{{ . | urlize }} {{ end }}" 
+            data-domain="{{ range .Params.project_domains }}{{ . | urlize }} {{ end }}"
+            data-role="{{ .Params.company_name | urlize }}">
+            {{ partial "project-card.html" . }}
+    </div>
+    {{ end }}
+</div>
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const params = new URLSearchParams(window.location.search);
+    const skill = params.get('skill');
+    const domain = params.get('domain');
+    const role = params.get('role');
+
+    const filterValue = skill || domain || role;
+    const filterType = skill ? 'skill' : (domain ? 'domain' : 'role');
+
+    if (filterValue) {
+        const indicator = document.getElementById('active-filter-indicator');
+        if (indicator) indicator.style.display = 'flex';
+        
+        const filterText = document.getElementById('filter-text');
+        if (filterText) filterText.innerText = filterValue.replace(/-/g, ' ');
+
+        // 1. Single pass to hide/show projects
+        const projects = document.querySelectorAll('.project-item');
+        projects.forEach(item => {
+            const attr = item.getAttribute(`data-${filterType}`) || "";
+            const isMatch = attr.trim().split(/\s+/).includes(filterValue);
+            item.style.display = isMatch ? 'block' : 'none';
+        });
+
+        // 2. Simplified Badge Highlighting
+        // Targets every badge inside the dashboard for a "mute others" effect
+        const dashboardBadges = document.querySelectorAll('.filter-dashboard .badge');
+        dashboardBadges.forEach(badge => {
+            const href = badge.getAttribute('href') || "";
+            // Check if this badge's link matches the current filter
+            if (href.includes(`${filterType}=${filterValue}`)) {
+                badge.style.opacity = "1";
+                badge.style.borderWidth = "2px"; // Makes the active one pop
+                badge.style.transform = "scale(1.05)";
+            } else {
+                badge.style.opacity = "0.3"; // Mute inactive badges
+                badge.style.filter = "grayscale(50%)"; // Extra visual cue
+            }
+        });
+    }
+});
+</script>
+{{ end }}

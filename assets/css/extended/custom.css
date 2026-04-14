@@ -1,0 +1,308 @@
+/* --- 1. Variables & Theme Colors --- */
+:root {
+    /* Outline Style - Light Mode (High Contrast) */
+    --badge-domain-text: #014c8a;   /* Slightly deeper blue */
+    --badge-domain-border: #01579b;
+    
+    --badge-employer-text: #4a148c; /* Strong purple */
+    --badge-employer-border: #7b1fa2;
+    
+    --badge-skill-text: #1b5e20;    /* Deep forest green */
+    --badge-skill-border: #2e7d32;
+
+    /* We'll set the background to transparent globally */
+    --badge-bg-transparent: transparent;
+}
+
+[data-theme='dark'] {
+    /* Outline Style - Dark Mode (Vibrant & Glowing) */
+    --badge-domain-text: #90caf9;   
+    --badge-domain-border: #42a5f5; 
+
+    --badge-employer-text: #f3e5f5; 
+    --badge-employer-border: #ce93d8; 
+
+    --badge-skill-text: #a5d6a7;    
+    --badge-skill-border: #66bb6a;
+}
+
+/* --- 2. List & Dashboard Layout --- */
+.list-container {
+    max-width: var(--main-width);
+    margin: 0 auto;
+    padding: 0 var(--gap);
+}
+
+.filter-dashboard {
+    background: var(--entry);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 2px solid var(--content);
+    /* Space it out from the page header and the first card */
+    margin: var(--gap);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.filter-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.filter-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--secondary);
+    min-width: 100px;
+    flex-shrink: 0;
+}
+
+.filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+#active-filter-indicator {
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.clear-btn {
+    background: var(--primary);
+    color: var(--theme);
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.75rem;
+}
+
+/* --- 3. Project Card Styling --- */
+.project-item {
+    margin-bottom: 2.5rem;
+    list-style: none;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.card-container:hover {
+    transform: translateY(-2px);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+.card-title a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.card-subtitle {
+    color: var(--secondary);
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.card-summary {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+/* --- 4. Footer & Badges --- */
+.card-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Space between badges and the action button */
+    margin-top: auto;
+}
+
+.card-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.badge {
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700; /* Keeps the text "weighty" enough to read */
+    letter-spacing: 0.05em;
+    text-decoration: none !important;
+    background: transparent; /* Removes the background entirely */
+    border: 1.5px solid; /* Slightly thicker border for better definition */
+    transition: opacity 0.3s ease, transform 0.2s ease, filter 0.3s ease;
+}
+
+/* Apply the specific colors */
+.badge-domain { 
+    color: var(--badge-domain-text); 
+    border-color: var(--badge-domain-border); 
+}
+.badge-employer { 
+    color: var(--badge-employer-text); 
+    border-color: var(--badge-employer-border); 
+}
+.badge-skill { 
+    color: var(--badge-skill-text); 
+    border-color: var(--badge-skill-border); 
+}
+
+/* Optional: Subtle hover effect to make them feel interactive */
+.badge:hover {
+    filter: brightness(1.2);
+    transform: translateY(-1px);
+}
+
+/* --- 5. View Live Site Button --- */
+.card-actions {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.btn-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none !important;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    
+    /* Colors and Shadow */
+    background: var(--primary);
+    color: var(--theme);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-live svg {
+    transition: transform 0.2s ease;
+}
+
+.btn-live:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.15);
+}
+
+.btn-live:hover svg {
+    transform: translate(2px, -2px); /* Makes the icon pop outward */
+}
+
+/* Dark Mode Button Contrast Fix */
+[data-theme='dark'] .btn-live {
+    color: #000; /* High contrast black text on primary accent */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* --- 6. Responsive Tweaks --- */
+@media (min-width: 768px) {
+    .card-container {
+        flex-direction: row;
+        align-items: stretch;
+        min-height: 300px;
+    }
+    
+    /* The link wrapper around the image */
+    .card-image-link, 
+    .card-container > .card-image-wrapper {
+        flex: 0 0 33.333%;
+        max-width: 33.333%;
+        display: block;
+    }
+
+    .card-image-wrapper {
+        height: 100%;
+        width: 100%;
+    }
+
+    .card-body-wrapper {
+        flex: 0 0 66.666%;
+        max-width: 66.666%;
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem;
+    }
+
+    /* Make the text link grow so footer stays at bottom */
+    .card-text-link, .card-text-content {
+        text-decoration: none;
+        color: inherit;
+        flex-grow: 1;
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-image-wrapper {
+        height: 200px;
+    }
+    
+    .card-body-wrapper {
+        padding: 1.25rem;
+    }
+
+    .btn-live {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+/* --- 7. Contact Form --- */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.contact-form input, .contact-form textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--tertiary);
+    background: var(--theme);
+    color: var(--primary);
+    width: 100%;
+}
+
+.contact-form button {
+    background: var(--primary);
+    color: var(--theme);
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.contact-form button:hover {
+    opacity: 0.8;
+}

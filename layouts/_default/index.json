@@ -1,0 +1,19 @@
+[
+  {{- range $i, $e := .Site.RegularPages }}
+  {{- if $i }}, {{ end -}}
+  {
+    "title": {{ .Title | jsonify }},
+    "permalink": {{ .Permalink | jsonify }},
+    "section": {{ .Section | humanize | jsonify }},
+    "content": {{ .Plain | jsonify }},
+    {{/* Projects specific fields */}}
+    "project_title": {{ .Params.project_title | default "" | jsonify }},
+    "domains": {{ .Params.project_domains | default (slice) | jsonify }},
+    "skills": {{ .Params.project_skills | default (slice) | jsonify }},
+    {{/* Roles specific fields */}}
+    "company": {{ .Params.company_name | default "" | jsonify }},
+    "job_title": {{ .Params.job_title | default "" | jsonify }},
+    "summary": {{ .Params.job_summary | default .Params.project_summary | default "" | jsonify }}
+  }
+  {{- end }}
+]

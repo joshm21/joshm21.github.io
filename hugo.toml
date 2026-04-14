@@ -1,0 +1,46 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'Josh M'
+theme = 'PaperMod'
+
+
+[params]
+  defaultTheme = "auto"
+
+    [params.label]
+        icon = "images/favicon.ico"
+        iconHeight = 35
+
+    [params.socialIcons]
+        name = "github"
+        url = "https://github.com/joshm21"
+
+[[menu.main]]
+    name = "Roles"
+    url = "/roles/"
+    weight = 10
+
+[[menu.main]]
+    name = "Projects"
+    url = "/projects/"
+    weight = 20
+
+[[menu.main]]
+    pre = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>'
+    name = ""
+    url = "/search/"
+    weight = 30
+[outputs]
+    home = ["HTML", "RSS", "JSON"]
+[params.searchConfig]
+    threshold = 0.3
+    keys = [
+        "title", 
+        "content", 
+        "project_title", 
+        "domains", 
+        "skills", 
+        "company", 
+        "job_title", 
+        "summary"
+    ]

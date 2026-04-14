@@ -1,0 +1,17 @@
+{{ $type := .type }}
+{{ $value := .value }}
+{{ $urlValue := $value | urlize }}
+
+{{ if eq $type "role" }}
+    {{/* If mode is filter, stay on projects. Otherwise, go to Role page */}}
+    {{ if eq .mode "filter" }}
+        <a href="{{ printf "/projects/?role=%s" $urlValue | relURL }}" class="badge badge-employer">{{ $value }}</a>
+    {{ else }}
+        <a href="{{ printf "/roles/%s" $urlValue | relURL }}" class="badge badge-employer">{{ $value }}</a>
+    {{ end }}
+{{ else }}
+    {{/* Skills and Domains usually always filter, but we'll respect the mode for consistency */}}
+    <a href="{{ printf "/projects/?%s=%s" $type $urlValue | relURL }}" class="badge badge-{{ $type }}">
+        {{ $value }}
+    </a>
+{{ end }}

@@ -1,0 +1,51 @@
+
+<div class="card-container {{ .class }}">
+
+    {{/* --- IMAGE COLUMN (Link 1) --- */}}
+    {{ if .photo }}
+        <a href="{{ .link | relURL }}" class="card-image-link">
+            <div class="card-image-wrapper">
+                <img src="{{ .photo }}" alt="{{ .title }}" class="card-image">
+            </div>
+        </a>
+    {{ end }}
+
+    {{/* --- CONTENT COLUMN --- */}}
+    <div class="card-body-wrapper">
+
+        {{/* Text Area (Link 2) */}}
+        <a href="{{ .link | relURL }}" class="card-text-link">
+            {{ template "card-text" . }}
+        </a>
+
+        {{/* Footer Area (No global link, buttons work normally) */}}
+        {{ if .badges }}
+        <div class="card-footer">
+            <div class="card-badges">
+                {{ .badges | safeHTML }}
+            </div>
+            {{ if .live_url }}
+            <div class="card-actions">
+                <a href="{{ .live_url }}" target="_blank" rel="noopener noreferrer" class="btn-live">
+                    <span>View Live Site ↗ </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+            </div>
+            {{ end }}
+        </div>
+        {{ end }}
+    </div>
+</div>
+
+{{/* Text Sub-Template */}}
+{{ define "card-text" }}
+<div class="card-content-top">
+    <div class="card-header">
+        <h2 class="card-title">{{ .title }}</h2>
+        {{ if .subtitle }}
+        <p class="card-subtitle">{{ .subtitle }}</p>
+        {{ end }}
+    </div>
+    <p class="card-summary">{{ .summary }}</p>
+</div>
+{{ end }}
