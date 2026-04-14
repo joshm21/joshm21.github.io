@@ -1,5 +1,6 @@
 ---
 title: "Financial Portfolio Tracker"
+featured: false
 project_title: "WealthWatch"
 project_photo: "/projects/wealthwatch.webp"
 project_summary: "A secure web application for tracking diversified investment portfolios with real-time market data integration."

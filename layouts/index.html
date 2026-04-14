@@ -1,9 +1,91 @@
 {{ define "main" }}
-<div class="homepage-wrapper">
-	<h1>{{ .Title }}</h1>
+<main class="main">
 
-	<div class="homepage-content">
-		{{ .Content }}
-	</div>
-</div>
+    <section class="hero-section" style="margin-top: 30px; margin-bottom: 60px;">
+        {{ $heroData := dict 
+            "class" "hero-card"
+            "title" "Hi, I'm Josh"
+            "subtitle" "Engineer • Developer • Researcher • Linguaphile"
+            "summary" "I’m dedicated to solving complex technical problems to serve and help others. Whether through automation, apps, or physical systems, I build tools that simplify lives and empower people."
+            "photo" "/images/profile.jpg" 
+            "link" "/contact/"
+            "badges" "<a href='/contact/'><span class='badge badge-role'>Get in Touch</span></a>"
+        }}
+        {{ partial "base-card.html" $heroData }}
+    </section>
+
+    <section class="domains-overview" style="margin-top: 60px;">
+        <h2 style="margin-bottom: 20px;">Industries & Domains</h2>
+        <div class="filter-dashboard" style="background: var(--entry); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border);">
+            <div class="card-badges">
+                {{ $allDomains := slice }}
+                {{ range (where .Site.RegularPages "Section" "projects") }}
+                    {{ range .Params.project_domains }}
+                        {{ $allDomains = $allDomains | append . }}
+                    {{ end }}
+                {{ end }}
+                {{ range ($allDomains | uniq | sort) }}
+                    {{ partial "badge.html" (dict "type" "domain" "value" .) }}
+                {{ end }}
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-work">
+        <h2 style="margin-bottom: 25px;">Featured Work</h2>
+        <div class="list-container">
+            {{ range first 3 (where .Site.RegularPages "Params.featured" true) }}
+                <div class="project-item">
+                    {{ partial "project-card.html" . }}
+                </div>
+            {{ end }}
+        </div>
+        <div style="margin-top: 20px; text-align: right;">
+            <a href="/projects/" style="color: var(--secondary); text-underline-offset: 4px;">View all projects &rarr;</a>
+        </div>
+    </section>
+
+    <section class="skills-overview" style="margin-top: 60px; padding-bottom: 60px;">
+        <h2 style="margin-bottom: 25px;">Technical Toolkit</h2>
+        
+        <div class="skills-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
+            
+            {{/* Define your Mapping */}}
+            {{ $automation := slice "Python" "Go" "Docker" "AWS Lambda" "MQTT" }}
+            {{ $apps := slice "TypeScript" "Next.js" "PostgreSQL" "GraphQL" "WebSockets" "Vue.js" }}
+            {{ $physical := slice "Robotics" "PLC" "Fixture Design" "IoT Architecture" }}
+            {{ $research := slice "NLP" "PyTorch" "LLMs" "Computer Vision" "Machine Learning" }}
+
+            {{ $categories := dict "Automation" $automation "Apps" $apps "Physical Systems" $physical "Research & NLP" $research }}
+
+            {{/* Collect all unique skills used across projects */}}
+            {{ $usedSkills := slice }}
+            {{ range (where .Site.RegularPages "Section" "projects") }}
+                {{ range .Params.skills }}
+                    {{ $usedSkills = $usedSkills | append . }}
+                {{ end }}
+            {{ end }}
+            {{ $uniqueSkills := $usedSkills | uniq }}
+
+            {{/* Display the Groups */}}
+            {{ range $catName, $catMatchList := $categories }}
+            <div class="filter-dashboard" style="background: var(--entry); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border);">
+                <h3 style="margin-bottom: 12px; font-size: 0.9rem; color: var(--secondary); text-transform: uppercase; letter-spacing: 1px;">
+                    {{ $catName }}
+                </h3>
+                <div class="card-badges">
+                    {{ range $uniqueSkills }}
+                        {{ if in $catMatchList . }}
+                            {{ partial "badge.html" (dict "type" "skill" "value" .) }}
+                        {{ end }}
+                    {{ end }}
+                </div>
+            </div>
+            {{ end }}
+
+        </div>
+    </section>
+
+
+</main>
 {{ end }}

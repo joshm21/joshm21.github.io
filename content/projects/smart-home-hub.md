@@ -1,5 +1,6 @@
 ---
 title: "Smart Home IoT Hub"
+featured: true
 project_title: "AmbientHome"
 project_photo: "/projects/ambient-home.jpg"
 project_url: "https://ambienthome.io"

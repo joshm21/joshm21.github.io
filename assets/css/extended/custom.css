@@ -339,3 +339,46 @@
     min-height: 5rem;
     resize: vertical;
 }
+
+
+/* --- 8. Hero Card --- */
+/* Styling specifically for the Hero Card on the landing page */
+.hero-card {
+    border: 2px solid var(--primary) !important; /* Thicker border to stand out */
+    padding: 10px;
+}
+.hero-card.card-container {
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+}
+
+.hero-card .card-image-wrapper {
+    /* Use aspect-ratio to force a square */
+    aspect-ratio: 1 / 1; 
+    width: 140px; 
+    height: 140px;
+    margin: 1.5rem;
+    border-radius: 50%; /* The Circle */
+    overflow: hidden;
+    flex-shrink: 0; /* Prevents squishing on small screens */
+    border: 2px solid var(--primary);
+}
+
+.hero-card .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Crops the image to fit the circle without stretching */
+}
+
+.hero-card .card-title {
+    font-size: 2.5rem !important; /* Make "Welcome" huge */
+    color: var(--primary);
+}
+
+.hero-card .card-subtitle {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+

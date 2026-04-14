@@ -1,5 +1,6 @@
 ---
 title: "AI Content Moderator"
+featured: true
 project_title: "SafeShield AI"
 project_photo: "/projects/safeshield.png"
 project_summary: "An automated system using natural language processing to flag inappropriate content in community forums."
