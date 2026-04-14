@@ -11,10 +11,6 @@ theme = 'PaperMod'
         icon = "images/favicon.ico"
         iconHeight = 35
 
-    [[params.socialIcons]]
-        name = "github"
-        url = "https://github.com/joshm21"
-
 [[menu.main]]
     name = "Roles"
     url = "/roles/"
