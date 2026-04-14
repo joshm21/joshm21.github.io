@@ -278,31 +278,64 @@
 
 
 /* --- 7. Contact Form --- */
+/* Container Spacing */
 .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
+    margin: 2rem 0;
+    max-width: 100%;
 }
 
-.contact-form input, .contact-form textarea {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid var(--tertiary);
-    background: var(--theme);
-    color: var(--primary);
+/* Grouping labels and inputs */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--secondary);
+}
+
+/* Inputs and Textarea */
+.contact-form input,
+.contact-form textarea {
     width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--entry);
+    color: var(--primary);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
 }
 
-.contact-form button {
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--tertiary);
+}
+
+/* Submit Button */
+.contact-form button[type="submit"] {
     background: var(--primary);
     color: var(--theme);
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
     border: none;
+    padding: 10px 25px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: opacity 0.2s ease;
 }
 
-.contact-form button:hover {
+.contact-form button[type="submit"]:hover {
     opacity: 0.8;
+}
+
+/* Textarea height */
+.contact-form textarea {
+    min-height: 5rem;
+    resize: vertical;
 }
