@@ -11,7 +11,7 @@ theme = 'PaperMod'
         icon = "images/favicon.ico"
         iconHeight = 35
 
-    [params.socialIcons]
+    [[params.socialIcons]]
         name = "github"
         url = "https://github.com/joshm21"
 
