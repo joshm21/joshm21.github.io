@@ -1,0 +1,24 @@
+{{/* layouts/partials/get-project-meta.html */}}
+{{ $allProjects := (where .Site.RegularPages "Section" "projects") }}
+
+{{ $domains := slice }}
+{{ $skills := slice }}
+{{ $roles := slice }}
+
+{{ range $allProjects }}
+    {{ if .Params.project_domains }}
+        {{ $domains = $domains | append .Params.project_domains }}
+    {{ end }}
+    {{ if .Params.project_skills }}
+        {{ $skills = $skills | append .Params.project_skills }}
+    {{ end }}
+    {{ if .Params.company_name }}
+        {{ $roles = $roles | append .Params.company_name }}
+    {{ end }}
+{{ end }}
+
+{{ return (dict 
+    "domains" ($domains | uniq | sort) 
+    "skills" ($skills | uniq | sort) 
+    "roles" ($roles | uniq | sort)
+) }}

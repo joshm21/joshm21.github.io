@@ -50,31 +50,21 @@
         
         <div class="skills-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
             
-            {{/* Define your Mapping */}}
-            {{ $automation := slice "Python" "Go" "Docker" "AWS Lambda" "MQTT" }}
-            {{ $apps := slice "TypeScript" "Next.js" "PostgreSQL" "GraphQL" "WebSockets" "Vue.js" }}
-            {{ $physical := slice "Robotics" "PLC" "Fixture Design" "IoT Architecture" }}
-            {{ $research := slice "NLP" "PyTorch" "LLMs" "Computer Vision" "Machine Learning" }}
+            {{ $meta := partial "get-project-meta.html" . }}
 
-            {{ $categories := dict "Automation" $automation "Apps" $apps "Physical Systems" $physical "Research & NLP" $research }}
+            {{/* Define your Categories */}}
+            {{ $categories := dict 
+                "Automation" (slice "Python" "Go" "Docker" "AWS Lambda" "MQTT")
+                "Apps"       (slice "TypeScript" "Next.js" "PostgreSQL" "GraphQL" "WebSockets")
+                "Physical Systems" (slice "Robotics" "PLC" "Fixture Design" "IoT Architecture")
+                "Research & NLP"   (slice "NLP" "PyTorch" "LLMs" "Computer Vision")
+            }}
 
-            {{/* Collect all unique skills used across projects */}}
-            {{ $usedSkills := slice }}
-            {{ range (where .Site.RegularPages "Section" "projects") }}
-                {{ range .Params.skills }}
-                    {{ $usedSkills = $usedSkills | append . }}
-                {{ end }}
-            {{ end }}
-            {{ $uniqueSkills := $usedSkills | uniq }}
-
-            {{/* Display the Groups */}}
             {{ range $catName, $catMatchList := $categories }}
-            <div class="filter-dashboard" style="background: var(--entry); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border);">
-                <h3 style="margin-bottom: 12px; font-size: 0.9rem; color: var(--secondary); text-transform: uppercase; letter-spacing: 1px;">
-                    {{ $catName }}
-                </h3>
+            <div class="filter-dashboard">
+                <h3>{{ $catName }}</h3>
                 <div class="card-badges">
-                    {{ range $uniqueSkills }}
+                    {{ range $meta.skills }}
                         {{ if in $catMatchList . }}
                             {{ partial "badge.html" (dict "type" "skill" "value" .) }}
                         {{ end }}

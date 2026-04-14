@@ -4,15 +4,13 @@
         <h1>Projects</h1>
 
         <div class="filter-dashboard">
-            {{ $allProjects := (where .Site.RegularPages "Section" "projects") }}
+            {{ $meta := partial "get-project-meta.html" . }}
 
             <div class="filter-row">
                 <span class="filter-label">Domains:</span>
                 <div class="filter-pills">
-                    {{ $domains := slice }}
-                    {{ range $allProjects }}{{ $domains = $domains | append .Params.project_domains }}{{ end }}
-                    {{ range ($domains | uniq | sort) }}
-                    {{ partial "badge" (dict "type" "domain" "value" . "mode" "filter") }}
+                    {{ range $meta.domains }}
+                        {{ partial "badge" (dict "type" "domain" "value" . "mode" "filter") }}
                     {{ end }}
                 </div>
             </div>
@@ -20,10 +18,8 @@
             <div class="filter-row">
                 <span class="filter-label">Skills:</span>
                 <div class="filter-pills">
-                    {{ $skills := slice }}
-                    {{ range $allProjects }}{{ $skills = $skills | append .Params.project_skills }}{{ end }}
-                    {{ range ($skills | uniq | sort) }}
-                    {{ partial "badge" (dict "type" "skill" "value" . "mode" "filter") }}
+                    {{ range $meta.skills }}
+                        {{ partial "badge" (dict "type" "skill" "value" . "mode" "filter") }}
                     {{ end }}
                 </div>
             </div>
