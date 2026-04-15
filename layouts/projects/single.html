@@ -4,14 +4,14 @@
         <h1 class="post-title">Summary</h1>
     </header>
 
+    {{/* Pass the full context as 'Page' and explicitly set 'link' to false/empty */}}
     {{ partial "project-card.html" (dict 
-        "Params" .Params 
-        "RelPermalink" "" 
+        "Page" . 
+        "link" false 
     ) }}
 
     <div class="post-content md-content">
         {{ .Content }}
     </div>
-
 </article>
 {{ end }}

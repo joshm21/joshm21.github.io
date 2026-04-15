@@ -1,21 +1,35 @@
-{{ $badges := "" }}
+{{- /* 0. Logic to handle both Page context and Dictionary context */ -}}
+{{- $p := . -}}
+{{- $targetLink := .RelPermalink -}}
+
+{{- if reflect.IsMap . -}}
+    {{- $p = .Page -}}
+    {{- /* If link is explicitly false in the dict, empty the targetLink */ -}}
+    {{- if eq .link false -}}
+        {{- $targetLink = "" -}}
+    {{- else if .link -}}
+        {{- $targetLink = .link -}}
+    {{- end -}}
+{{- end -}}
+
+{{- $badges := "" -}}
 
 {{/* 1. Domains */}}
-{{ range .Params.project_domains }}
+{{ range $p.Params.project_domains }}
     {{ $badges = printf "%s %s" $badges (partial "badge" (dict "type" "domain" "value" .)) }}
 {{ end }}
 
 {{/* 2. Role */}}
-{{ $badges = printf "%s %s" $badges (partial "badge" (dict "type" "role" "value" .Params.company_name)) }}
+{{ $badges = printf "%s %s" $badges (partial "badge" (dict "type" "role" "value" $p.Params.company_name)) }}
 
 {{/* 3. Skills */}}
-{{ range .Params.project_skills }}
+{{ range $p.Params.project_skills }}
     {{ $badges = printf "%s %s" $badges (partial "badge" (dict "type" "skill" "value" .)) }}
 {{ end }}
 
 {{ $photoURL := "" }}
-{{/* Look for the image defined in your new 'cover' metadata */}}
-{{ with .Resources.GetMatch (.Params.cover.image | default "nonexistent") }}
+{{/* Use $p.Resources to ensure we are looking inside the Page Bundle */}}
+{{ with $p.Resources.GetMatch ($p.Params.cover.image | default "nonexistent") }}
     {{/* Resize it to 600px wide for the card so it loads fast */}}
     {{ $thumb := .Resize "600x webp q80" }}
     {{ $photoURL = $thumb.RelPermalink }}
@@ -23,11 +37,11 @@
 
 {{ partial "base-card.html" (dict 
     "class" "project-card"
-    "title" .Params.project_title
-    "subtitle" .Params.company_name
-    "summary" .Params.project_summary
+    "title" $p.Params.project_title
+    "subtitle" $p.Params.company_name
+    "summary" $p.Params.project_summary
     "photo" $photoURL
-    "link" .RelPermalink
-    "live_url" .Params.project_url
+    "link" $targetLink
+    "live_url" $p.Params.project_url
     "badges" $badges
 ) }}
