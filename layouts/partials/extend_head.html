@@ -1,2 +1,21 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+
+{{/* Check every project.company_name against all roles.company_name */}}
+{{- if hugo.IsServer -}}
+  {{/* 1. Collect all valid company names from roles */}}
+  {{- $valid_companies := slice -}}
+  {{- range (where site.RegularPages "Section" "roles") -}}
+    {{- if .Params.company_name -}}
+      {{- $valid_companies = $valid_companies | append .Params.company_name -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{/* 2. Check every project's company_name against that list */}}
+  {{- range (where site.RegularPages "Section" "projects") -}}
+    {{- $project_company := .Params.company_name -}}
+    {{- if and $project_company (not (in $valid_companies $project_company)) -}}
+      {{- warnf "DATA ERROR: Project '%s' uses company_name: '%s'. This does not match any file in content/roles/." .File.Path $project_company -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

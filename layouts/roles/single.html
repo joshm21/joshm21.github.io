@@ -9,18 +9,19 @@
 	    "RelPermalink" "" 
 	) }}
 
-	{{/* The Logic: Filter projects by current company_name */}}
+	{{/* Capture the company name from the current Role page */}}
 	{{ $current_company := .Params.company_name }}
-	{{ $related_projects := where (where .Site.RegularPages "Section" "projects") "Params.company_name" "=="
-	$current_company }}
+
+	{{/* Use $.Site or site to ensure global access */}}
+	{{ $related_projects := where (where $.Site.RegularPages "Section" "projects") "Params.company_name" $current_company }}
 
 	{{ if $related_projects }}
-	<h2 style="margin-bottom: 1rem;">Projects at {{ $current_company }}</h2>
-	<div class="list-container">
+	    <h2 style="margin-bottom: 1rem;">Related Projects</h2>
+	    <div class="list-container">
 		{{ range $related_projects }}
-		{{ partial "project-card.html" . }}
+		    {{ partial "project-card.html" . }}
 		{{ end }}
-	</div>
+	    </div>
 	{{ end }}
-</article>
+	</article>
 {{ end }}
