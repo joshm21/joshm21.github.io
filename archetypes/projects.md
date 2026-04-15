@@ -7,6 +7,7 @@ project_summary: ""
 project_domains: []
 project_skills: []
 company_name: ""
+weight: 10
 ---
 ## Situation
 *Context is key. Describe the challenge or the environment.*

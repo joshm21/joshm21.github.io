@@ -6,5 +6,5 @@ company_url: ""
 job_title: ""
 job_summary: ""
 role_domain: ""
-weight: ""
+weight: 10
 ---
