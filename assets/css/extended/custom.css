@@ -18,6 +18,10 @@
     --badge-skill-border: #66bb6a;
 }
 
+.md-content {
+    padding: 0 1.5rem;
+}
+
 /* --- 2. List & Dashboard Layout --- */
 .list-container {
     max-width: var(--main-width);

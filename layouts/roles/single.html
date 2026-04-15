@@ -9,10 +9,6 @@
 	    "RelPermalink" "" 
 	) }}
 
-	<div class="post-content">
-		{{ .Content }}
-	</div>
-
 	{{/* The Logic: Filter projects by current company_name */}}
 	{{ $current_company := .Params.company_name }}
 	{{ $related_projects := where (where .Site.RegularPages "Section" "projects") "Params.company_name" "=="
