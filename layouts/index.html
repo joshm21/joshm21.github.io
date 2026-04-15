@@ -31,8 +31,8 @@
         </div>
     </section>
 
-    <section class="featured-work">
-        <h2 style="margin-bottom: 25px;">Featured Work</h2>
+    <section class="featured-work" style="margin-top: 60px;">
+        <h2 style="margin-bottom: 20px;">Featured Work</h2>
         <div class="list-container">
             {{ range first 3 (where .Site.RegularPages "Params.featured" true) }}
                 <div class="project-item">
@@ -45,33 +45,40 @@
         </div>
     </section>
 
-    <section class="skills-overview" style="margin-top: 60px; padding-bottom: 60px;">
-        <h2 style="margin-bottom: 25px;">Technical Toolkit</h2>
-        
-        <div class="skills-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))">
+    <section class="education-languages" style="margin-top: 60px;">
+        <h2 style="margin-bottom: 20px;">Education & Languages</h2>
+        <div style="background: var(--entry); padding: 25px; border-radius: var(--radius); border: 1px solid var(--border);">
             
-            {{ $meta := partial "get-project-meta.html" . }}
-
-            {{/* Define your Categories */}}
-            {{ $categories := dict 
-                "Automation" (slice "Python" "Go" "Docker" "AWS Lambda" "MQTT")
-                "Apps"       (slice "TypeScript" "Next.js" "PostgreSQL" "GraphQL" "WebSockets")
-                "Physical Systems" (slice "Robotics" "PLC" "Fixture Design" "IoT Architecture")
-                "Research & NLP"   (slice "NLP" "PyTorch" "LLMs" "Computer Vision")
-            }}
-
-            {{ range $catName, $catMatchList := $categories }}
-            <div class="filter-dashboard">
-                <h3>{{ $catName }}</h3>
-                <div class="card-badges">
-                    {{ range $meta.skills }}
-                        {{ if in $catMatchList . }}
-                            {{ partial "badge.html" (dict "type" "skill" "value" .) }}
-                        {{ end }}
-                    {{ end }}
+            <div class="education-item" style="margin-bottom: 25px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                        <h3 style="margin: 0; color: var(--primary); font-size: 1.2rem;">B.S. Mechanical Engineering</h3>
+                        <div style="color: var(--secondary); font-weight: 600;">Dordt University</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <span style="background: var(--tertiary); padding: 2px 10px; border-radius: var(--radius); font-size: 0.85rem; font-weight: bold;">GPA: 4.0 / 4.0</span>
+                        <div style="font-size: 0.85rem; margin-top: 4px; opacity: 0.8;">Summa Cum Laude</div>
+                    </div>
+                </div>
+                <div style="margin-top: 10px; font-size: 0.95rem; opacity: 0.9;">
+                    <strong>Certification:</strong> Passed Fundamentals of Engineering (FE) Exam
                 </div>
             </div>
-            {{ end }}
+
+            <div style="padding-top: 20px; border-top: 1px solid var(--border);">
+                <h4 style="margin: 0 0 15px 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7;">Languages</h4>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <div style="background: var(--code-bg); padding: 5px 12px; border-radius: 6px; border: 1px solid var(--border); font-size: 0.85rem;">
+                        <strong>English</strong> <span style="opacity: 0.7; margin-left: 5px;">Native</span>
+                    </div>
+                    <div style="background: var(--code-bg); padding: 5px 12px; border-radius: 6px; border: 1px solid var(--border); font-size: 0.85rem;">
+                        <strong>Georgian</strong> <span style="opacity: 0.7; margin-left: 5px;">A2 (Actively Studying)</span>
+                    </div>
+                    <div style="background: var(--code-bg); padding: 5px 12px; border-radius: 6px; border: 1px solid var(--border); font-size: 0.85rem;">
+                        <strong>Russian</strong> <span style="opacity: 0.7; margin-left: 5px;">B1</span>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </section>
