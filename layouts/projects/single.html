@@ -4,7 +4,10 @@
         <h1 class="post-title">{{ .Params.project_title }}</h1>
     </header>
 
-    {{ partial "project-card.html" . }}
+    {{ partial "project-card.html" (dict 
+        "Params" .Params 
+        "RelPermalink" "" 
+    ) }}
 
     <div class="post-content">
         {{ .Content }}
