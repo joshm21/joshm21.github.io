@@ -1,27 +1,19 @@
 /* --- 1. Variables & Theme Colors --- */
 :root {
-    /* Outline Style - Light Mode (High Contrast) */
-    --badge-domain-text: #014c8a;   /* Slightly deeper blue */
+    --badge-domain-text: #014c8a;
     --badge-domain-border: #01579b;
-    
-    --badge-employer-text: #4a148c; /* Strong purple */
+    --badge-employer-text: #4a148c;
     --badge-employer-border: #7b1fa2;
-    
-    --badge-skill-text: #1b5e20;    /* Deep forest green */
+    --badge-skill-text: #1b5e20;
     --badge-skill-border: #2e7d32;
-
-    /* We'll set the background to transparent globally */
     --badge-bg-transparent: transparent;
 }
 
 [data-theme='dark'] {
-    /* Outline Style - Dark Mode (Vibrant & Glowing) */
     --badge-domain-text: #90caf9;   
     --badge-domain-border: #42a5f5; 
-
     --badge-employer-text: #f3e5f5; 
     --badge-employer-border: #ce93d8; 
-
     --badge-skill-text: #a5d6a7;    
     --badge-skill-border: #66bb6a;
 }
@@ -38,7 +30,6 @@
     padding: 1.5rem;
     border-radius: 12px;
     border: 2px solid var(--content);
-    /* Space it out from the page header and the first card */
     margin: var(--gap);
     display: flex;
     flex-direction: column;
@@ -46,6 +37,7 @@
 }
 
 .filter-row {
+    display: flex;
     align-items: center;
     gap: 1rem;
 }
@@ -65,61 +57,65 @@
     gap: 6px;
 }
 
-#active-filter-indicator {
-    margin-top: 0.5rem;
-    padding-top: 1rem;
-    border-top: 1px dashed var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.9rem;
-}
-
-.clear-btn {
-    background: var(--primary);
-    color: var(--theme);
-    padding: 4px 10px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-size: 0.75rem;
-}
-
-/* --- 3. Project Card Styling --- */
-.project-item {
-    margin-bottom: 2.5rem;
-    list-style: none;
-}
-
+/* --- 3. Project Card Core Styling --- */
 .card-container {
+    position: relative; /* Context for the main-card-link overlay */
     display: flex;
     flex-direction: column;
     background: var(--entry);
     border: 1px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
-    transition: transform 0.2s ease;
-    padding: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    padding: 1rem 0 1rem 0;
 }
 
-.card-container:hover {
-    transform: translateY(-2px);
+/* Hover lift only if it has a detail link */
+.card-container.is-clickable:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-.card-image {
+/* The Invisible Overlay Link */
+.main-card-link {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 1; /* Above text, below interactive buttons */
+}
+
+.card-image-wrapper {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1rem 0 1rem;
 }
 
-.card-content {
+..card-image {
+    width: 100%;
+    object-fit: contain;
+    padding: 1rem; /* Adds a "frame" look so images don't touch the edges */
+    background: rgba(0,0,0,0.03); /* Subtle contrast for the image area */
+}
+
+.card-body-wrapper {
+    display: flex;
+    flex-direction: column;
     padding: 1.5rem;
+    flex-grow: 1;
 }
 
-.card-title a {
+.card-content-top {
+    flex-grow: 1; /* Pushes footer to the bottom */
+    margin-bottom: 1.5rem;
+}
+
+.card-title {
     color: var(--primary);
-    text-decoration: none;
+    margin-bottom: 0.5rem;
 }
 
 .card-subtitle {
@@ -128,17 +124,13 @@
     margin-bottom: 1rem;
 }
 
-.card-summary {
-    margin-bottom: 1rem;
-    line-height: 1.6;
-}
-
-/* --- 4. Footer & Badges --- */
+/* --- 4. Footer, Badges & Actions --- */
 .card-footer {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* Space between badges and the action button */
-    margin-top: auto;
+    gap: 1.25rem;
+    position: relative;
+    z-index: 2; /* Ensures buttons/badges are clickable over the overlay */
 }
 
 .card-badges {
@@ -150,129 +142,118 @@
 .badge {
     padding: 4px 12px;
     border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 700; /* Keeps the text "weighty" enough to read */
-    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    font-weight: 700;
+    background: transparent;
+    border: 1.5px solid;
     text-decoration: none !important;
-    background: transparent; /* Removes the background entirely */
-    border: 1.5px solid; /* Slightly thicker border for better definition */
-    transition: opacity 0.3s ease, transform 0.2s ease, filter 0.3s ease;
 }
 
-/* Apply the specific colors */
-.badge-domain { 
-    color: var(--badge-domain-text); 
-    border-color: var(--badge-domain-border); 
-}
-.badge-employer { 
-    color: var(--badge-employer-text); 
-    border-color: var(--badge-employer-border); 
-}
-.badge-skill { 
-    color: var(--badge-skill-text); 
-    border-color: var(--badge-skill-border); 
-}
+.badge-domain { color: var(--badge-domain-text); border-color: var(--badge-domain-border); }
+.badge-employer { color: var(--badge-employer-text); border-color: var(--badge-employer-border); }
+.badge-skill { color: var(--badge-skill-text); border-color: var(--badge-skill-border); }
 
-/* Optional: Subtle hover effect to make them feel interactive */
-.badge:hover {
-    filter: brightness(1.2);
-    transform: translateY(-1px);
-}
-
-/* --- 5. View Live Site Button --- */
+/* Buttons Container */
 .card-actions {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between; /* Splitting buttons to left and right */
+    align-items: center;
+    gap: 10px;
 }
 
-.btn-live {
+.btn-live, .btn-details {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 20px;
+    padding: 8px 16px;
     font-size: 0.85rem;
     font-weight: 700;
     text-decoration: none !important;
     border-radius: 8px;
     transition: all 0.2s ease;
-    
-    /* Colors and Shadow */
+}
+
+/* Pull Live Site Left */
+.btn-live {
     background: var(--primary);
     color: var(--theme);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    order: 1;
 }
 
-.btn-live svg {
-    transition: transform 0.2s ease;
+/* Pull Details Right */
+.btn-details {
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    order: 2;
+    margin-left: auto; /* Force-shove to right if only one button exists */
 }
 
-.btn-live:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.1);
-    box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.15);
+.btn-details:hover {
+    background: var(--primary);
+    color: var(--theme);
 }
 
-.btn-live:hover svg {
-    transform: translate(2px, -2px); /* Makes the icon pop outward */
-}
+[data-theme='dark'] .btn-live { color: #000; }
 
-/* Dark Mode Button Contrast Fix */
-[data-theme='dark'] .btn-live {
-    color: #000; /* High contrast black text on primary accent */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
-
-/* --- 6. Responsive Tweaks --- */
+/* --- 5. Responsive Layout --- */
 @media (min-width: 768px) {
     .card-container {
         flex-direction: row;
-        align-items: stretch;
         min-height: 300px;
-    }
-    
-    /* The link wrapper around the image */
-    .card-image-link, 
-    .card-container > .card-image-wrapper {
-        flex: 0 0 33.333%;
-        max-width: 33.333%;
-        display: block;
     }
 
     .card-image-wrapper {
-        height: 100%;
+        flex: 0 0 33.333%;
+        max-width: 33.333%;
+        
+        display: flex;
+        align-items: center;    /* Center vertically */
+        justify-content: center; /* Center horizontally */
+        padding: 0;
+    }
+
+    .card-image {
+        /* Remove height: 100% and let contain work its magic */
         width: 100%;
+        min-height: 100px;
+        max-height: 280px; /* Optional: keeps image from getting too tall */
+        object-fit: contain;
+        padding: 1rem;
     }
 
     .card-body-wrapper {
         flex: 0 0 66.666%;
         max-width: 66.666%;
-        display: flex;
-        flex-direction: column;
-        padding: 1.5rem;
-    }
-
-    /* Make the text link grow so footer stays at bottom */
-    .card-text-link, .card-text-content {
-        text-decoration: none;
-        color: inherit;
-        flex-grow: 1;
-        display: block;
     }
 }
 
-@media (max-width: 768px) {
-    .card-image-wrapper {
-        height: 200px;
-    }
-    
-    .card-body-wrapper {
-        padding: 1.25rem;
-    }
+/* --- 6. Hero Card --- */
+.hero-card .card-image {
+    border-radius: 50%; 
+    object-fit: cover;   /* Keeps the aspect ratio from distorting */
+    display: block;      /* Removes bottom whitespace gap */
+    max-height: 200px;
+    max-width: 200px;
+}
 
-    .btn-live {
-        width: 100%;
-        justify-content: center;
-    }
+.hero-card .card-badges {
+    display: flex;
+    justify-content: flex-end
+}
+
+.hero-card .badge {
+    font-size: 1.1rem;      /* Slightly larger text */
+    padding: 0.6rem 1.2rem; /* Vertical and Horizontal breathing room */
+    font-weight: 600;       /* Makes the text a bit bolder */
+    display: inline-block;  /* Ensures padding pushes the borders correctly */
+    border-radius: 8px;     /* Optional: rounds the corners of the badge */
+    transition: transform 0.2s ease; /* Smooth effect for the hover below */
+}
+
+/* Optional: Add a little interactive "pop" when hovering */
+.hero-card .badge:hover{
+    transform: scale(1.05);
+    filter: brightness(1.1);
 }
 
 
@@ -338,46 +319,3 @@
     min-height: 5rem;
     resize: vertical;
 }
-
-
-/* --- 8. Hero Card --- */
-/* Styling specifically for the Hero Card on the landing page */
-.hero-card {
-    border: 2px solid var(--primary) !important; /* Thicker border to stand out */
-    padding: 10px;
-}
-.hero-card.card-container {
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-}
-
-.hero-card .card-image-wrapper {
-    /* Use aspect-ratio to force a square */
-    aspect-ratio: 1 / 1; 
-    width: 140px; 
-    height: 140px;
-    margin: 1.5rem;
-    border-radius: 50%; /* The Circle */
-    overflow: hidden;
-    flex-shrink: 0; /* Prevents squishing on small screens */
-    border: 2px solid var(--primary);
-}
-
-.hero-card .card-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Crops the image to fit the circle without stretching */
-}
-
-.hero-card .card-title {
-    font-size: 2.5rem !important; /* Make "Welcome" huge */
-    color: var(--primary);
-}
-
-.hero-card .card-subtitle {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
