@@ -1,6 +1,6 @@
 ---
 title: "developer"
-company_name: "Technical Consultant"
+company_name: "Freelancer"
 company_logo: "/images/developer.jpg"
 company_url: "joshm21.github.io"
 job_title: "Developer"

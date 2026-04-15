@@ -1,6 +1,6 @@
 ---
 title: "Lozier"
-company_name: "Lozier "
+company_name: "Lozier"
 company_logo: "/images/lozier.jpg"
 company_url: "https://www.lozier.com/"
 job_title: "Manufacturing Engineer"
