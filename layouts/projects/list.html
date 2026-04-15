@@ -44,45 +44,84 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const params = new URLSearchParams(window.location.search);
-    const skill = params.get('skill');
-    const domain = params.get('domain');
-    const role = params.get('role');
+    
+    function applyFilter() {
+        const params = new URLSearchParams(window.location.search);
+        const skill = params.get('skill');
+        const domain = params.get('domain');
+        const role = params.get('role');
 
-    const filterValue = skill || domain || role;
-    const filterType = skill ? 'skill' : (domain ? 'domain' : 'role');
-
-    if (filterValue) {
-        const indicator = document.getElementById('active-filter-indicator');
-        if (indicator) indicator.style.display = 'flex';
+        const filterValue = skill || domain || role;
+        const filterType = skill ? 'skill' : (domain ? 'domain' : 'role');
         
+        const indicator = document.getElementById('active-filter-indicator');
+        const projects = document.querySelectorAll('.project-item');
+        // We now target ALL badges on the page, including card badges
+        const allBadges = document.querySelectorAll('.badge');
+
+        if (!filterValue) {
+            if (indicator) indicator.style.display = 'none';
+            projects.forEach(item => item.style.display = 'block');
+            allBadges.forEach(badge => {
+                badge.style.opacity = "1";
+                badge.style.filter = "none";
+                badge.style.transform = "none";
+                badge.style.borderWidth = "1px"; // Reset to default
+            });
+            return;
+        }
+
+        if (indicator) indicator.style.display = 'flex';
         const filterText = document.getElementById('filter-text');
         if (filterText) filterText.innerText = filterValue.replace(/-/g, ' ');
 
-        // 1. Single pass to hide/show projects
-        const projects = document.querySelectorAll('.project-item');
         projects.forEach(item => {
             const attr = item.getAttribute(`data-${filterType}`) || "";
             const isMatch = attr.trim().split(/\s+/).includes(filterValue);
             item.style.display = isMatch ? 'block' : 'none';
         });
 
-        // 2. Simplified Badge Highlighting
-        // Targets every badge inside the dashboard for a "mute others" effect
-        const dashboardBadges = document.querySelectorAll('.filter-dashboard .badge');
-        dashboardBadges.forEach(badge => {
+        // Highlight matching badges everywhere (Dashboard AND Cards)
+        allBadges.forEach(badge => {
             const href = badge.getAttribute('href') || "";
-            // Check if this badge's link matches the current filter
             if (href.includes(`${filterType}=${filterValue}`)) {
                 badge.style.opacity = "1";
-                badge.style.borderWidth = "2px"; // Makes the active one pop
+                badge.style.filter = "none";
                 badge.style.transform = "scale(1.05)";
+                badge.style.borderWidth = "2px";
             } else {
-                badge.style.opacity = "0.3"; // Mute inactive badges
-                badge.style.filter = "grayscale(50%)"; // Extra visual cue
+                badge.style.opacity = "0.3";
+                badge.style.filter = "grayscale(50%)";
+                badge.style.transform = "scale(1)";
+                badge.style.borderWidth = "1px";
             }
         });
     }
+
+    // INTERCEPTOR: Listen to the whole main container
+    const mainContent = document.querySelector('.main');
+    if (mainContent) {
+        mainContent.addEventListener('click', function(e) {
+            // Check if what was clicked is a badge or the clear button
+            const badge = e.target.closest('.badge') || e.target.closest('.clear-btn');
+            
+            // If it's a badge but NOT the employer/role badge (which goes to a different page)
+            if (badge && !badge.classList.contains('badge-employer')) {
+                e.preventDefault();
+                const url = new URL(badge.href, window.location.origin);
+                
+                // Update URL and apply filter
+                history.pushState({}, '', url);
+                applyFilter();
+                
+                // Optional: Scroll back to top of project list on click
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    }
+
+    window.addEventListener('popstate', applyFilter);
+    applyFilter();
 });
 </script>
 {{ end }}
