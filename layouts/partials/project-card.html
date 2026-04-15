@@ -13,12 +13,20 @@
     {{ $badges = printf "%s %s" $badges (partial "badge" (dict "type" "skill" "value" .)) }}
 {{ end }}
 
+{{ $photoURL := "" }}
+{{/* Look for the image defined in your new 'cover' metadata */}}
+{{ with .Resources.GetMatch (.Params.cover.image | default "nonexistent") }}
+    {{/* Resize it to 600px wide for the card so it loads fast */}}
+    {{ $thumb := .Resize "600x webp q80" }}
+    {{ $photoURL = $thumb.RelPermalink }}
+{{ end }}
+
 {{ partial "base-card.html" (dict 
     "class" "project-card"
     "title" .Params.project_title
     "subtitle" .Params.company_name
     "summary" .Params.project_summary
-    "photo" .Params.project_photo
+    "photo" $photoURL
     "link" .RelPermalink
     "live_url" .Params.project_url
     "badges" $badges

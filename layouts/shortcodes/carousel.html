@@ -1,0 +1,64 @@
+{{ $images := .Page.Resources.ByType "image" }}
+{{ $coverName := .Page.Params.cover.image | default "" }}
+
+{{ $slides := slice }}
+{{ range $images }}
+    {{ if not (in .Name $coverName) }}
+        {{ $slides = $slides | append . }}
+    {{ end }}
+{{ end }}
+
+{{ if gt (len $slides) 0 }}
+<h2 id="gallery-header" style="margin-top: 2rem;">Gallery</h2>
+
+<div id="project-carousel" class="splide" style="margin: 1rem 0; visibility: hidden;">
+  <div class="splide__track">
+    <ul class="splide__list">
+      {{ range $slides }}
+        {{ $optimized := .Resize "1200x webp q90" }}
+        {{/* Get the filename without extension and replace hyphens with spaces for a cleaner look */}}
+        {{ $caption := .Name | replaceRE "-|_" " " | title }}
+        
+        <li class="splide__slide" style="background-color: #f8f8f8; border-radius: 12px; position: relative; display: flex; align-items: center; justify-content: center;">
+          <img src="{{ $optimized.RelPermalink }}" 
+               alt="{{ .Name }}" 
+               style="width: 100%; height: 500px; object-fit: contain;">
+          
+          <div class="carousel-caption" style="position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.6); color: white; padding: 10px; text-align: center; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; font-size: 0.9rem;">
+            {{ $caption }}
+          </div>
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var splide = new Splide('#project-carousel', {
+        type      : 'fade',
+        rewind    : true,
+        autoplay  : true,
+        interval  : 4000, // Increased slightly to give time to read
+        pauseOnHover: true,
+        arrows    : true,
+        pagination: true,
+        height    : '500px',
+    });
+    
+    splide.on('mounted', function() {
+        document.getElementById('project-carousel').style.visibility = 'visible';
+    });
+    
+    splide.mount();
+});
+</script>
+
+<style>
+    .splide__arrow { background: rgba(0,0,0,0.5) !important; z-index: 2; }
+    .splide__arrow svg { fill: white !important; }
+    .splide__pagination { bottom: 3rem !important; } /* Move dots up so they don't cover the caption */
+    .splide__pagination__page.is-active { background: #fff !important; }
+    .splide__list { height: 500px !important; }
+</style>
+{{ end }}

@@ -11,6 +11,12 @@ theme = 'PaperMod'
         icon = "images/favicon.ico"
         iconHeight = 35
 
+[params.cover]
+    responsiveImages = true
+
+[markup.goldmark.image]
+    unsafe = true # Allows Hugo to process images inside Markdown
+
 [[menu.main]]
     name = "Roles"
     url = "/roles/"

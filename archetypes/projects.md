@@ -1,13 +1,26 @@
 ---
-title: ""
-project_title: ""
-project_photo: "/images/"
+title: "{{ replace .Name "-" " " | title }}"
+draft: true
+weight: 10
+
+# PaperMod / SEO
+cover:
+    image: "cover.jpg" # Reference local file in the same folder
+    alt: "Project cover image"
+    caption: "Project Description"
+    relative: true # Essential for Page Bundles
+    responsiveImages: true
+
+# Custom Metadata
+project_title: "{{ replace .Name "-" " " | title }}"
 project_summary: ""
 project_domains: []
 project_skills: []
 company_name: ""
-weight: 10
 ---
+
+{{< carousel >}}
+
 ## Situation
 *Context is key. Describe the challenge or the environment.*
 - What was the problem you were trying to solve?
