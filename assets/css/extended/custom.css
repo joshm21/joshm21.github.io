@@ -30,7 +30,6 @@
     padding: 1.5rem;
     border-radius: 12px;
     border: 2px solid var(--content);
-    margin: var(--gap);
     display: flex;
     flex-direction: column;
     gap: 1rem;
