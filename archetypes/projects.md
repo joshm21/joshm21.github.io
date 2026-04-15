@@ -1,6 +1,5 @@
 ---
 title: ""
-featured: false
 project_title: ""
 project_photo: "/images/"
 project_summary: ""

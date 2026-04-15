@@ -31,16 +31,15 @@
         </div>
     </header>
 
-    <div class="list-container">
-        {{ range .Pages }}
+    {{ range .Pages.ByWeight }}
         <div class="project-item" 
             data-skill="{{ range .Params.project_skills }}{{ . | urlize }} {{ end }}" 
             data-domain="{{ range .Params.project_domains }}{{ . | urlize }} {{ end }}"
             data-role="{{ .Params.company_name | urlize }}">
             {{ partial "project-card.html" . }}
-    </div>
+        </div>
     {{ end }}
-</div>
+
 </main>
 
 <script>

@@ -33,7 +33,7 @@
 
     <section class="featured-work" style="margin-top: 60px;">
         <h2 style="margin-bottom: 20px;">Featured Work</h2>
-            {{ range first 3 (where .Site.RegularPages "Params.featured" true) }}
+            {{ range first 3 (where .Site.RegularPages "Section" "projects").ByWeight }}
                 <div class="project-item">
                     {{ partial "project-card.html" . }}
                 </div>
