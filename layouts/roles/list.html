@@ -1,10 +1,21 @@
 {{ define "main" }}
 <header class="page-header">
-	<h1>Professional Experience</h1>
+	<h1>Professional Roles</h1>
 </header>
+
 <div class="list-container">
-	{{ range .Pages }}
-	{{ partial "role-card.html" . }}
+	{{/* Group pages by the 'role_domain' front matter parameter */}}
+	{{ range .Pages.GroupByParam "role_domain" }}
+		<div class="domain-group">
+			<h2 class="domain-title">{{ .Key }}</h2> {{/* .Key is the name of the domain, e.g., "Engineering" */}}
+			
+			<div class="roles-grid">
+				{{/* Sort within the domain by weight (ascending) */}}
+				{{ range .Pages.ByWeight }}
+					{{ partial "role-card.html" . }}
+				{{ end }}
+			</div>
+		</div>
 	{{ end }}
 </div>
 {{ end }}
