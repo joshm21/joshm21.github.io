@@ -28,11 +28,6 @@
     letter-spacing: 0.5px; 
 }
 
-/* Optional: If you want them even bolder when hovering */
-#menu li a:hover {
-    font-weight: 900;
-}
-
 /* --- 2. List & Dashboard Layout --- */
 .list-container {
     max-width: var(--main-width);
@@ -51,8 +46,6 @@
 }
 
 .filter-row {
-    display: flex;
-    align-items: center;
     gap: 1rem;
 }
 

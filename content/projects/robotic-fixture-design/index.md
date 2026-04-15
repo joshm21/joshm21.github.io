@@ -1,7 +1,7 @@
 ---
 title: "Robotic Fixture Design"
 draft: false
-weight: 10
+weight: 1
 
 # PaperMod standard for list pages and SEO
 cover:
@@ -14,8 +14,8 @@ cover:
 # Your custom project metadata
 project_title: "Robotic Fixture Design"
 project_summary: "Designed and implemented a robotic welding cell with automated pneumatic clamps, halving labor costs and reducing workplace injuries."
-project_domains: ["Engineering", "Industrial Automation"]
-project_skills: ["Robotics", "PLC Programming", "CAD Modeling", "Actuators", "Sensors"]
+project_domains: ["Engineering"]
+project_skills: ["Robotics", "Machine Design", "PLC Programming", "CAD Modeling"]
 company_name: "Lozier"
 
 ---
