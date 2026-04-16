@@ -6,28 +6,37 @@
         <div class="filter-dashboard">
             {{ $meta := partial "get-project-meta.html" . }}
 
-            <div class="filter-row">
-                <span class="filter-label">Domains:</span>
-                <div class="filter-pills">
-                    {{ range $meta.domains }}
-                        {{ partial "badge" (dict "type" "domain" "value" . "mode" "filter") }}
-                    {{ end }}
-                </div>
-            </div>
+            <details class="filter-collapsible">
+                <summary class="filter-summary" style="cursor: pointer; padding: 10px 0;">
+                    <div class="summary-wrapper" style="display: inline-flex; justify-content: space-between; align-items: center; width: calc(100% - 25px); vertical-align: middle;">
+                        <span class="summary-text">Filters</span>
+                        
+                        <a href="/projects/" id="active-filter-indicator" class="clear-btn" style="display:none;" onclick="event.stopPropagation();">
+                            ✕ Clear
+                        </a>
+                    </div>
+                </summary>
 
-            <div class="filter-row">
-                <span class="filter-label">Skills:</span>
-                <div class="filter-pills">
-                    {{ range $meta.skills }}
-                        {{ partial "badge" (dict "type" "skill" "value" . "mode" "filter") }}
-                    {{ end }}
-                </div>
-            </div>
+                <div class="filter-content">
+                    <div class="filter-row">
+                        <span class="filter-label">Domains:</span>
+                        <div class="filter-pills">
+                            {{ range $meta.domains }}
+                                {{ partial "badge" (dict "type" "domain" "value" . "mode" "filter") }}
+                            {{ end }}
+                        </div>
+                    </div>
 
-            <div id="active-filter-indicator" style="display:none; justify-content: space-between;">
-                <span>Filtering by: <strong id="filter-text"></strong></span>
-                <a href="/projects/" class="clear-btn">✕ Clear All</a>
-            </div>
+                    <div class="filter-row">
+                        <span class="filter-label">Skills:</span>
+                        <div class="filter-pills">
+                            {{ range $meta.skills }}
+                                {{ partial "badge" (dict "type" "skill" "value" . "mode" "filter") }}
+                            {{ end }}
+                        </div>
+                    </div>
+                </div>
+            </details>
         </div>
     </header>
 
