@@ -1,7 +1,7 @@
 ---
 title: "Paintline Optimization"
 draft: false
-weight: 100
+weight: 110
 
 # PaperMod / SEO
 cover:
@@ -14,7 +14,7 @@ cover:
 # Custom Metadata
 project_title: "Paintline Optimization"
 project_summary: "Optimized powder utilization and developed a custom scheduling tool for a paint line, netting over $20k in annual savings."
-project_domains: ["Engineering"]
+project_domains: ["Mechanical Engineering", "Automation"]
 project_skills: ["Scripting", "Optimization", "Testing", "Data Analysis"]
 company_name: "Lozier"
 ---

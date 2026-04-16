@@ -1,7 +1,7 @@
 ---
 title: "Drafting Automations"
 draft: false
-weight: 100
+weight: 120
 
 # PaperMod / SEO
 cover:
@@ -13,8 +13,8 @@ cover:
 
 # Custom Metadata
 project_title: "Drafting Automations"
-project_summary: "Developed a suite of AutoLISP and VBA utilities to automate repetitive civil drafting tasks, including data extraction, turnout geometry, and intelligent text replacement."
-project_domains: ["Engineering", "Automation"]
+project_summary: "Streamlined financial operations by developing an automation suite that eliminated manual data entry between spreadsheets and vendor portals."
+project_domains: ["Automation"]
 project_skills: ["Scripting", "CAD Modeling"]
 company_name: "JFSCO"
 ---

@@ -14,8 +14,8 @@ cover:
 # Custom Metadata
 project_title: "Planetary Gearbox Analysis"
 project_summary: "Engineered a system dynamics calculator and technical white papers to analyze inertial loads across multi-stage planetary gearboxes, bridging the gap between complex engineering data and end user resources."
-project_domains: ["Engineering"]
-project_skills: ["Calculations" , "Techincal Writing", "Scripting", "CAD Modeling"]
+project_domains: ["Mechanical Engineering"]
+project_skills: ["Calculations" , "Technical Writing", "Scripting", "CAD Modeling"]
 company_name: "Groschopp"
 ---
 

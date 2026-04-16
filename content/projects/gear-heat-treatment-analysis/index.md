@@ -1,7 +1,7 @@
 ---
 title: "Gear Heat Treatment Analysis"
 draft: true
-weight: 100
+weight: 140
 
 # PaperMod / SEO
 cover:
@@ -14,7 +14,7 @@ cover:
 # Custom Metadata
 project_title: "Gear Heat Treatment Analysis"
 project_summary: "Established a rigorous heat treatment validation process for third-party gears, utilizing micro-indentation testing and automated data analysis to ensure gearbox reliability."
-project_domains: ["Engineering"] 
+project_domains: ["Mechanical Engineering"] 
 project_skills: ["Quality Assurance", "Technical Writing", "Testing", "Scripting"]
 company_name: "Groschopp"
 ---

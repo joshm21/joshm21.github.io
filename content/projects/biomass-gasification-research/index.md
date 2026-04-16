@@ -1,7 +1,7 @@
 ---
 title: "Biomass Gasification Research"
 draft: false
-weight: 10
+weight: 130
 
 # PaperMod / SEO
 cover:
@@ -13,9 +13,9 @@ cover:
 
 # Custom Metadata
 project_title: "Biomass Gasification Research"
-project_summary: "R&D focused on increasing cold-gas efficiency and reducing tar in a 75 KWth bubbling fluidized bed reactor using agricultural waste."
-project_domains: ["Engineering", "Research"]
-project_skills: ["Machine Design", "Testing", "Techincal Writing", "Programming"]
+project_summary: "Engineered solutions to increase cold-gas efficiency and reduce tar formation in a 75 KWth bubbling fluidized bed reactor using agricultural waste."
+project_domains: ["Mechanical Engineering", "Research"]
+project_skills: ["Machine Design", "Testing", "Technical Writing", "PLC Programming"]
 company_name: "Dordt University - Engineering Faculty"
 ---
 
