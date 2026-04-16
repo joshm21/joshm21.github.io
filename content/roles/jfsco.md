@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "JFSCO"
 company_name: "JFSCO"
 company_logo: "/images/jfsco.png"
 company_url: "https://www.linkedin.com/company/jfsco-engineering"

@@ -1,7 +1,7 @@
 ---
 title: "School Behavior App"
 draft: false
-weight: 2
+weight: 20
 
 # PaperMod / SEO
 cover:
