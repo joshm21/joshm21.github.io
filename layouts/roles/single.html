@@ -17,11 +17,9 @@
 
 	{{ if $related_projects }}
 	    <h2 style="margin-bottom: 1rem;">Related Projects</h2>
-	    <div class="list-container">
 		{{ range $related_projects }}
 		    {{ partial "project-card.html" . }}
 		{{ end }}
-	    </div>
 	{{ end }}
 	</article>
 {{ end }}
