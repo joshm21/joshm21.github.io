@@ -123,8 +123,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 history.pushState({}, '', url);
                 applyFilter();
                 
-                // Optional: Scroll back to top of project list on click
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                // Scroll to first visible project card
+                // 1. Get all elements with the class
+                const cards = document.querySelectorAll('.project-card');
+                // 2. Find the first one that is actually visible
+                const firstVisibleCard = Array.from(cards).find(card => {
+                  return card.offsetWidth > 0 || card.offsetHeight > 0 || card.getClientRects().length > 0;
+                });
+                // 3. Scroll to it if it exists
+                if (firstVisibleCard) {
+                  firstVisibleCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }
         });
     }
