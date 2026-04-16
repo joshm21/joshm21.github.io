@@ -5,7 +5,7 @@ weight: 10
 
 # PaperMod / SEO
 cover:
-    image: "cover.jpg" # Reference local file in the same folder
+    image: "cover.png" # Reference local file in the same folder
     alt: "Project cover image"
     caption: "Project Description"
     relative: true # Essential for Page Bundles
