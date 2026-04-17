@@ -14,7 +14,7 @@ cover:
 # Custom Metadata
 project_title: "Paintline Optimization"
 project_summary: "Optimized powder utilization and developed a custom scheduling tool for a paint line, netting over $20k in annual savings."
-project_domains: ["Mechanical Engineering", "Software Engineering"]
+project_domains: ["Mechanical Engineering", "Software Developer"]
 project_skills: ["Scripting", "Optimization", "Testing", "Data Analysis"]
 company_name: "Lozier"
 ---

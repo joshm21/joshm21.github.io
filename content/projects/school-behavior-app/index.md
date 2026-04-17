@@ -14,7 +14,7 @@ cover:
 # Custom Metadata
 project_title: "School Behavior App"
 project_summary: "A full-stack web app serving teachers, students, parents, and admins to manage behavioral data and reward systems across an entire school district."
-project_domains: ["Software Engineering"]
+project_domains: ["Software Developer"]
 project_skills: ["Web Apps", "Rapid Prototyping"]
 company_name: "Freelancer"
 ---

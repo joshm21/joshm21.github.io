@@ -14,7 +14,7 @@ cover:
 # Custom Metadata
 project_title: "Georgian NLP Segmentation & Visualization"
 project_summary: "A specialized NLP toolset that uses Conditional Random Fields (CRF) to segment complex verb forms and a Vue.js interface to visualize morphological shifts."
-project_domains: ["Research", "Software Engineering"]
+project_domains: ["Research", "Software Developer"]
 project_skills: ["Natural Language Processing", "Machine Learning", "Web Apps"]
 company_name: "Freelancer"
 ---
